@@ -1,0 +1,34 @@
+@import '../../../../packages/design-system/src/tokens.css';
+@import '../../../../packages/ui/src/styles/global.css';
+
+.numeric-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ */
+/* Marketing-only utilities                                           */
+/* ------------------------------------------------------------------ */
+.hero-mesh {
+  background-color: var(--color-brand-900);
+  background-image:
+    radial-gradient(ellipse 55% 60% at 12% 8%, rgb(22 101 79 / 0.55), transparent 60%),
+    radial-gradient(ellipse 45% 50% at 88% 0%, rgb(42 138 109 / 0.28), transparent 62%),
+    radial-gradient(ellipse 70% 60% at 50% 110%, rgb(4 20 15 / 0.9), transparent 65%);
+}
+
+.hero-grain {
+  background-image: radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+.lift-on-hover {
+  transition:
+    transform var(--duration-base) var(--ease-out-soft),
+    box-shadow var(--duration-base) var(--ease-out-soft),
+    border-color var(--duration-base) var(--ease-out-soft);
+}
+.lift-on-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-brand-200);
+}

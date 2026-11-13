@@ -1,0 +1,11 @@
+@import '../../../../packages/design-system/src/tokens.css';
+@import '../../../../packages/ui/src/styles/global.css';
+
+.numeric-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.shell-sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
