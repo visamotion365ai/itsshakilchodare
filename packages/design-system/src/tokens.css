@@ -1,0 +1,137 @@
+/**
+ * VisaHobe Design System — Semantic CSS Custom Properties
+ * ADR-009: Premium White Base + Dark-Green Primary (#0D3B2E) + Selective Liquid Glass
+ *
+ * This file is the single source of truth for the colour system.
+ * It is imported by every application through `packages/ui/src/styles/global.css`.
+ */
+
+:root {
+  /* ---------------------------------------------------------------- */
+  /* Surfaces                                                          */
+  /* ---------------------------------------------------------------- */
+  --color-bg: #fdfdfd;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f6f4;
+  --color-surface-sunken: #eef2ef;
+
+  /* ---------------------------------------------------------------- */
+  /* Brand — Dark Green                                                */
+  /* ---------------------------------------------------------------- */
+  --color-brand-950: #04140f;
+  --color-brand-900: #07211a;
+  --color-brand-800: #0a2d23;
+  --color-brand-700: #0d3b2e; /* PRIMARY */
+  --color-brand-600: #114b3a;
+  --color-brand-500: #16654f;
+  --color-brand-400: #2a8a6d;
+  --color-brand-300: #57b092;
+  --color-brand-200: #9ed3c1;
+  --color-brand-100: #e3efea;
+  --color-brand-50: #f1f8f5;
+
+  /* ---------------------------------------------------------------- */
+  /* Status                                                            */
+  /* ---------------------------------------------------------------- */
+  --color-success: #15803d;
+  --color-success-soft: #e8f5ec;
+  --color-warning: #b45309;
+  --color-warning-soft: #fdf3e3;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fdeceb;
+  --color-info: #1d4ed8;
+  --color-info-soft: #eaf0fd;
+
+  /* ---------------------------------------------------------------- */
+  /* Text                                                              */
+  /* ---------------------------------------------------------------- */
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #6b7280;
+  --color-text-inverse: #ffffff;
+
+  /* ---------------------------------------------------------------- */
+  /* Lines, focus and elevation                                        */
+  /* ---------------------------------------------------------------- */
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-ring: #16654f;
+
+  --shadow-xs: 0 1px 2px 0 rgb(7 33 26 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(7 33 26 / 0.06), 0 1px 2px -1px rgb(7 33 26 / 0.05);
+  --shadow-md: 0 4px 12px -2px rgb(7 33 26 / 0.08), 0 2px 6px -2px rgb(7 33 26 / 0.05);
+  --shadow-lg: 0 12px 32px -8px rgb(7 33 26 / 0.14), 0 4px 12px -4px rgb(7 33 26 / 0.06);
+  --shadow-xl: 0 24px 56px -16px rgb(7 33 26 / 0.22);
+
+  /* Radius scale — refined, never pill-heavy except badges */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+
+  /* ---------------------------------------------------------------- */
+  /* Typography                                                        */
+  /* ---------------------------------------------------------------- */
+  --font-sans:
+    'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', 'Noto Sans Bengali',
+    'Hind Siliguri', sans-serif;
+  --font-display:
+    'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'Inter Variable', system-ui,
+    'Noto Sans Bengali', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------------------------------------------------------------- */
+  /* Liquid Glass — permitted overlay surfaces only                    */
+  /* ---------------------------------------------------------------- */
+  --glass-bg: rgb(255 255 255 / 0.72);
+  --glass-bg-strong: rgb(255 255 255 / 0.86);
+  --glass-border: rgb(255 255 255 / 0.6);
+  --glass-tint: rgb(227 239 234 / 0.42);
+  --glass-blur: 18px;
+  --glass-saturate: 140%;
+  --glass-highlight: linear-gradient(
+    145deg,
+    rgb(255 255 255 / 0.55) 0%,
+    rgb(255 255 255 / 0.12) 42%,
+    rgb(255 255 255 / 0) 100%
+  );
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 420ms;
+
+  /* Layout */
+  --shell-sidebar: 264px;
+  --shell-topbar: 64px;
+}
+
+/* Brand-forward dark canvas used by the public marketing hero and auth rails */
+.theme-brand-canvas {
+  --color-bg: #f7faf8;
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------ */
+/* Accessibility: honour reduced transparency & reduced motion         */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-bg: #ffffff;
+    --glass-bg-strong: #ffffff;
+    --glass-tint: #f4f6f4;
+    --glass-blur: 0px;
+    --glass-saturate: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

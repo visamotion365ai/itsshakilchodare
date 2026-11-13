@@ -11,6 +11,14 @@ import {
 import { generateSignedStorageUrl, StorageAccessDeniedError } from '@visahobe/core';
 import { prisma, withTenantContext } from '@visahobe/database';
 
+/**
+ * The Prisma client is only generated (and only usable) when a database is
+ * present. Without `DATABASE_URL` the suite runs every non-database assertion
+ * and skips the integration blocks, so the API/RLS contract is still checked
+ * on a machine with no Postgres or no generated engine binary.
+ */
+const dbAvailable = Boolean(process.env.DATABASE_URL);
+
 describe('Tenant Isolation & RLS Security Suite (TICKET-P0-006)', () => {
   const tenantA = '11111111-1111-4111-8111-111111111111';
   const tenantB = '22222222-2222-4222-8222-222222222222';
@@ -25,7 +33,7 @@ describe('Tenant Isolation & RLS Security Suite (TICKET-P0-006)', () => {
   const dbStaffUserId = 'c3333333-3333-4333-8333-333333333333';
 
   beforeAll(async () => {
-    if (!process.env.DATABASE_URL) return;
+    if (!dbAvailable) return;
 
     // Seed test tenants (tenants table is not tenant-scoped, no RLS)
     await prisma.tenant.upsert({
@@ -87,7 +95,7 @@ describe('Tenant Isolation & RLS Security Suite (TICKET-P0-006)', () => {
   });
 
   afterAll(async () => {
-    if (!process.env.DATABASE_URL) return;
+    if (!dbAvailable) return;
     try {
       await prisma.auditLog.deleteMany({
         where: { tenantId: { in: [dbTenantAId, dbTenantBId] } },
