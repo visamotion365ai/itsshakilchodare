@@ -1,6 +1,18 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from './client.js';
 
+/**
+ * The interactive-transaction client handed to `prisma.$transaction`.
+ * Resolves to Prisma's `TransactionClient` once the client is generated, and
+ * falls back to a structural type if generation has not run yet.
+ */
+export type TenantTransactionClient = 'auditLog' extends keyof Prisma.TransactionClient
+  ? Prisma.TransactionClient
+  : {
+      $executeRaw(strings: TemplateStringsArray, ...values: unknown[]): Promise<number>;
+      auditLog: { create(args: { data: Record<string, unknown> }): Promise<unknown> };
+    };
+
 export const PRIVILEGED_STAFF_ROLES = [
   'owner',
   'admin',
@@ -117,7 +129,7 @@ export async function withTenantContext<T>(
     }
   }
 
-  return prisma.$transaction(async (tx) => {
+  return prisma.$transaction(async (tx: TenantTransactionClient) => {
     // Switch to non-superuser application role if it exists in pg_roles so RLS
     // policies are genuinely enforced even when the database connection user is a SUPERUSER.
     await tx.$executeRaw`
